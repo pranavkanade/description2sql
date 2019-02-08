@@ -1,3 +1,6 @@
 *__pycache__*
 *.ipynb_checkpoints
 *.db
+notebooks/Models/MNIST_data/*
+notebooks/Models/old_data/*
+*.pkl

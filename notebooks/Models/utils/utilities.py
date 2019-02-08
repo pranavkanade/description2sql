@@ -33,6 +33,31 @@ def get_root(doc):
         return None
     return roots[0]
 
+def _is_verb(root):
+    if root.pos_ in VERB:
+        return True
+    else:
+        return False
+    
+def get_aux(root):
+    aux_list = []
+    for child in root.children:
+        if child.pos_ in VERB and child.dep_ in AUX:
+            aux_list.append(child)
+    return aux_list
+
+def check_if_wh(nominals):
+    subj = nominals[0]
+    if subj.tag_ in WH:
+        return True
+    return False
+
+def get_csubj(root_verb):
+    for child in root_verb.children:
+        if child.dep_ in CASUAL_SUBJECT and child.pos_ in VERB:
+            return child
+    return None    
+
 # get nominal subjects
 def get_nominal_subjects(root):
     subject_list = list()
@@ -178,3 +203,47 @@ def get_verb_and_subj_pair(data_sample):
         pobj = get_objects(prep)
         nominals.append(pobj)
     return nominals
+
+def get_subtree_list(tok):
+    return [t for t in tok.subtree]
+
+def get_reshaped_subtree(tok):
+    subtree = get_subtree_list(tok)
+    if len(subtree) > 7:
+        id = 0
+        for indx in range(len(subtree)):
+            if subtree[indx] == tok:
+                id = indx
+                break
+        lw = 0
+        hs = len(subtree)
+        if id - 3 > lw:
+            lw = id - 3
+        if id + 3 < hs:
+            hs = id + 3
+        subtree = subtree[lw:hs]
+    return subtree   
+
+# We need to get a list of atmost 7 toks where
+def get_desired_subtree(tok):
+    subtree_temp = get_reshaped_subtree(tok)
+    actual_subtree = list()
+    for tok in subtree_temp:
+        if not (tok.pos_ in ["PUNCT", "SYM", "ADP", "NUM", "PROPN", "SPACE", "INTJ", "DET", "CCONJ"] or
+                tok.tag_ in ["WDT", "WP", "WP$", "WRB", "DT"] or
+                tok.dep_ in ["pobj", "compound", "cc", "conj"]):
+            actual_subtree.append(tok)
+    return (actual_subtree, subtree_temp)
+
+def get_amod(doc):
+    amods = list()
+    for tok in doc:
+        if tok.dep_ in ["amod"]:
+            amods.append(tok)
+    return amods
+
+def get_actual_subtree_for_finding_agg(tok, amod):
+    act, temp = get_desired_subtree(tok)
+    act.extend([amd for amd in amod
+                if amd.text not in [tok.text for tok in act]])
+    return act
