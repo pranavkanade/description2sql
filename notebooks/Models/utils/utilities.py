@@ -1,9 +1,11 @@
+#!/root/installation/miniconda3/envs/tf_nlp/bin/python
 from utils.consts import *
 import json
-import spacy
+# import spacy
 from pprint import pprint
+import numpy as np
 
-def get_data(path):
+def get_json_data(path):
     with open(path, 'r') as fp:
         json_data = json.load(fp)
     return json_data
@@ -11,15 +13,6 @@ def get_data(path):
 def printmd(string, color=None):
     colorstr = "<span style='color:{}'>{}</span>".format(color, string)
     display(Markdown(colorstr))
-
-def show_dep(doc):
-    options = {'compact':True,
-               'collapse_punct':False,
-               'collapse_phrases':True,
-               'color': 'white',
-               'font': 'Source Sans Pro',
-               'bg': '#09a3d5'}
-    spacy.displacy.render(doc, jupyter=True, style='dep')
 
 # get the root
 def get_root(doc):
@@ -225,6 +218,7 @@ def get_reshaped_subtree(tok):
     return subtree   
 
 # We need to get a list of atmost 7 toks where
+# tok => subj
 def get_desired_subtree(tok):
     subtree_temp = get_reshaped_subtree(tok)
     actual_subtree = list()
@@ -233,7 +227,7 @@ def get_desired_subtree(tok):
                 tok.tag_ in ["WDT", "WP", "WP$", "WRB", "DT"] or
                 tok.dep_ in ["pobj", "compound", "cc", "conj"]):
             actual_subtree.append(tok)
-    return (actual_subtree, subtree_temp)
+    return actual_subtree
 
 def get_amod(doc):
     amods = list()
@@ -243,8 +237,141 @@ def get_amod(doc):
     return amods
 
 def get_actual_subtree_for_finding_agg(tok, amod):
-    act, temp = get_desired_subtree(tok)
+    act = get_desired_subtree(tok)
     act.extend([amd for amd in amod
                 if amd.text not in [tok.text for tok in act]])
     return act
 
+# collected from getSelectCol
+def get_subjs(doc):
+    # Find out the root of the given statement
+    root = get_root(doc)
+
+    is_verb = _is_verb(root)
+    aux = None
+    # Some times the root can be a noun, in that case it'll always be associated to
+    # an aux verb, and we gotta find it
+    aux = get_aux(root)
+    # If there is any aux found, we use it as our verb root
+    if aux is not None and len(aux) > 0:
+        root_verb = aux[0]
+    else:
+        # Else, we use our root as it is
+        root_verb = root
+    # Check if there is any csubj attached this means we have two wh nouns attached to
+    # two different verbs one is asking and other qualifying.
+    csubj_verb = get_csubj(root_verb)
+    if csubj_verb is not None:
+        root_verb = csubj_verb
+    # nominals in this case is going to be a list of all the cols
+    # in SELECT clause. If we find any nsubj attached to the root_verb we catch it here.
+    nominals = get_nominal_subjects(root_verb)
+    is_wh = False
+    # If what we have found is not actually a noun but a question noun (wh-word)
+    # TODO: In this case we may want to go on hunt for the actual nominal col.
+    if len(nominals) != 0:
+        is_wh = check_if_wh(nominals)
+    if is_wh:
+        # for now
+        pass
+    # Even after all this if there is no way the prog have found a nominal
+    # find out if there is any prop attached to the verb.
+    # If there is then we may look for prep_obj attached to it for the nominal.
+    prep = None
+    if len(nominals) == 0:
+        prep = get_prep(root_verb)
+    pobj = None
+    if prep is not None:
+        pobj = get_objects(prep)
+        nominals.append(pobj)
+    return nominals
+
+def get_list_of_toks_to_find_agg(subj, doc):
+    amod_list = get_amod(doc)
+    act_list = get_actual_subtree_for_finding_agg(subj, amod_list)
+    return act_list
+
+def get_agg_input_vector(subj, doc):
+    act_toks = get_list_of_toks_to_find_agg(subj, doc)
+    X_agg = get_vector(act_toks, 5, 1500)
+    return X_agg
+
+def get_num(doc):
+    candidates = list()
+    for child in doc:
+        if child.pos_ in ["NUM"]:
+            candidates.append(child)
+    return candidates
+
+def join_nums(candis):
+    if len(candis) == 1:
+        return str(candis[0])
+    if len(candis) > 2:
+        candis = candis[:2]
+    return "-".join(candis)
+
+def get_where_cond_val(doc):
+    candis = get_num(doc)
+    return join_nums(candis)
+
+def get_verbs_other_than_root(doc):
+    verbs = list()
+    o_verbs = list()
+    root = get_root(doc)
+    for tok in doc:
+        if tok.pos_ in VERB and tok.idx != root.idx:
+            o_verbs.append(tok)
+        elif tok.pos_ in VERB:
+            verbs.append(tok)
+    return verbs, o_verbs
+
+ADJECTIVES = ["amod", "acomp"]
+
+def get_amod_n_acomp_for_verbs(vb):
+    st = get_subtree_list(vb)
+    mods = list()
+    for each_tok in st:
+        if each_tok.dep_ in ADJECTIVES:
+            mods.append(each_tok)
+    return mods
+
+def get_op_mods(vb_list):
+    op_mods = list()
+    for each_vb in vb_list:
+        op_mods.extend(get_amod_n_acomp_for_verbs(each_vb))
+    return op_mods
+
+def get_all_op_mods(r_verbs, o_verbs):
+    all_op_mods = list()
+    o_op_mods = get_op_mods(o_verbs)
+    all_op_mods.extend(o_op_mods[::-1])
+    if len(all_op_mods) == 0:
+        r_op_mods = get_op_mods(r_verbs)
+        all_op_mods.extend(r_op_mods[::-1])
+    return all_op_mods
+
+def get_actual_params(r_verbs, o_verbs, all_op_mods):     
+    all_op_mods.extend(r_verbs)
+    all_op_mods.extend(o_verbs)
+    return all_op_mods
+
+def get_cond_op_input_vector(doc):
+    r_verbs, o_verbs = get_verbs_other_than_root(doc)
+    all_op_mods = get_all_op_mods(r_verbs, o_verbs)
+    act_adjs = get_actual_params(r_verbs, o_verbs, all_op_mods)
+    X_cond_op = get_vector(act_adjs, 4, 1200)
+    return X_cond_op
+
+def get_vector(act_list, max_size, xv_size):
+    temp_x = np.array([])
+    if act_list is not None and len(act_list) > 0:
+        if len(act_list) > max_size:
+            act_list = act_list[:5]
+        for tok in act_list:
+            if tok.has_vector:
+                temp_x = np.append(temp_x, tok.vector)
+    else:
+        temp_x = np.zeros((xv_size))
+    if temp_x.size < xv_size:
+        temp_x = np.append(temp_x, np.zeros((xv_size - temp_x.size)))
+    return temp_x
