@@ -15,6 +15,7 @@ APPOS = ["appos"]
 AND = ["conj"]
 AUX = ["aux", "auxpass"]
 CASUAL_SUBJECT = ["csubj", "csubjpass"]
+ADJECTIVES = ["amod", "acomp"]
 
 ## Tag
 WH = ["WP", "WP$", "WDT"]

@@ -247,3 +247,4 @@ def get_actual_subtree_for_finding_agg(tok, amod):
     act.extend([amd for amd in amod
                 if amd.text not in [tok.text for tok in act]])
     return act
+

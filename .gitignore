@@ -4,3 +4,4 @@
 notebooks/Models/MNIST_data/*
 notebooks/Models/old_data/*
 *.pkl
+notebooks/Models/junk/
