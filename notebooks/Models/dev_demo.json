@@ -1,0 +1,513 @@
+[
+    {
+        "header": [
+            "Country",
+            "Interview",
+            "Suit",
+            "Gown",
+            "Average"
+        ],
+        "page_title": "Miss Teen USA 1997",
+        "types": ["text", "text", "text", "text", "text"],
+        "id": "1-11884814-3",
+        "section_title": "Final competition scores",
+        "caption": "Final competition scores",
+        "rows": [
+            ["Tennessee", "9.74", "9.75", "9.75", "9.75"],
+            ["Illinois", "9.60", "9.67", "9.75", "9.67"],
+            ["Kansas", "9.55", "9.59", "9.70", "9.61"],
+            ["North Carolina", "9.55", "9.61", "9.54", "9.57"],
+            ["Oklahoma", "9.60", "9.57", "9.46", "9.54"],
+            ["Hawaii", "9.40", "9.51", "9.64", "9.52"],
+            ["Virginia", "9.50", "9.33", "9.58", "9.47"],
+            ["North Dakota", "9.40", "9.32", "9.60", "9.44"],
+            ["Massachusetts", "9.36", "9.42", "9.47", "9.42"]
+        ],
+        "name": "table_11884814_3",
+        "questions": [
+            {
+                "phase": 1,
+                "table_id": "1-11884814-3",
+                "question": "What was the gown score when the suit was 9.61?",
+                "sql": { "sel": 3, "conds": [[2, 0, "9.61"]], "agg": 0 }
+            },
+            {
+                "phase": 1,
+                "table_id": "1-11884814-3",
+                "question": "What is the suit score when the interview was 9.74?",
+                "sql": { "sel": 2, "conds": [[1, 0, "9.74"]], "agg": 0 }
+            },
+            {
+                "phase": 1,
+                "table_id": "1-11884814-3",
+                "question": "Which country had an interview score of 9.40 and average of 9.44?",
+                "sql": {
+                    "sel": 0,
+                    "conds": [[1, 0, "9.40"], [4, 0, "9.44"]],
+                    "agg": 0
+                }
+            },
+            {
+                "phase": 1,
+                "table_id": "1-11884814-3",
+                "question": "Which country had the suit score 9.67?",
+                "sql": { "sel": 0, "conds": [[2, 0, "9.67"]], "agg": 0 }
+            },
+            {
+                "phase": 1,
+                "table_id": "1-11884814-3",
+                "question": "What was the average for the country with the suit score of 9.57?",
+                "sql": { "sel": 4, "conds": [[2, 0, "9.57"]], "agg": 0 }
+            }
+        ]
+    },
+    {
+        "header": [
+            "Season",
+            "League",
+            "Rank",
+            "Games",
+            "Points",
+            "GF",
+            "GA",
+            "Manager",
+            "Top Scorer",
+            "Goals"
+        ],
+        "page_title": "De Graafschap",
+        "types": [
+            "text",
+            "text",
+            "real",
+            "real",
+            "real",
+            "real",
+            "real",
+            "text",
+            "text",
+            "real"
+        ],
+        "id": "1-1218784-1",
+        "section_title": "Results",
+        "caption": "Results",
+        "rows": [
+            [
+                "1999-00",
+                "Eredivisie",
+                14,
+                34,
+                33,
+                41,
+                60,
+                "Rob McDonald",
+                "Eric Viscaal",
+                10
+            ],
+            [
+                "2000-01",
+                "Eredivisie",
+                15,
+                34,
+                31,
+                44,
+                66,
+                "Jurrie Koolhof",
+                "Marino Promes",
+                8
+            ],
+            [
+                "2001-02",
+                "Eredivisie",
+                14,
+                34,
+                37,
+                43,
+                55,
+                "Jurrie Koolhof",
+                "Martijn Meerdink",
+                10
+            ],
+            [
+                "2002-03",
+                "Eredivisie",
+                18,
+                34,
+                23,
+                35,
+                84,
+                "Peter Bosz",
+                "Hans van de Haar",
+                11
+            ],
+            [
+                "2003-04",
+                "Eerste divisie",
+                6,
+                36,
+                64,
+                63,
+                43,
+                "Frans Adelaar",
+                "Jhon van Beukering / Hilmi Mihci",
+                9
+            ],
+            [
+                "2004-05",
+                "Eredivisie",
+                17,
+                34,
+                23,
+                32,
+                78,
+                "Gert Kruys / Andries Ulderink",
+                "Jhon van Beukering",
+                9
+            ],
+            [
+                "2005-06",
+                "Eerste divisie",
+                5,
+                38,
+                62,
+                63,
+                51,
+                "Jan de Jonge",
+                "Donny de Groot",
+                13
+            ],
+            [
+                "2006-07",
+                "Eerste divisie",
+                1,
+                38,
+                83,
+                88,
+                41,
+                "Jan de Jonge",
+                "Berry Powel",
+                29
+            ],
+            [
+                "2007-08",
+                "Eredivisie",
+                16,
+                34,
+                30,
+                33,
+                64,
+                "Jan de Jonge",
+                "Donny de Groot",
+                8
+            ],
+            [
+                "2008-09",
+                "Eredivisie",
+                17,
+                34,
+                30,
+                24,
+                58,
+                "Henk van Stee / Darije Kalezi\u0107",
+                "Jason Oost / Ben Sahar",
+                5
+            ],
+            [
+                "2009-10",
+                "Eerste divisie",
+                1,
+                38,
+                81,
+                85,
+                34,
+                "Darije Kalezi\u0107",
+                "Hugo Bargas",
+                16
+            ]
+        ],
+        "name": "table_1218784_1",
+        "questions": [
+            {
+                "phase": 1,
+                "table_id": "1-1218784-1",
+                "question": "Who is the top scorer where gf is 41?",
+                "sql": { "sel": 8, "conds": [[5, 0, 41]], "agg": 0 }
+            },
+            {
+                "phase": 1,
+                "table_id": "1-1218784-1",
+                "question": "How many goals were scored in the 2005-06 season?",
+                "sql": { "sel": 9, "conds": [[0, 0, "2005-06"]], "agg": 0 }
+            },
+            {
+                "phase": 1,
+                "table_id": "1-1218784-1",
+                "question": "How many seasons had a rank of 16?",
+                "sql": { "sel": 0, "conds": [[2, 0, 16]], "agg": 3 }
+            },
+            {
+                "phase": 1,
+                "table_id": "1-1218784-1",
+                "question": "Who is the manager whose rank is 16?",
+                "sql": { "sel": 7, "conds": [[2, 0, 16]], "agg": 0 }
+            }
+        ]
+    },
+    {
+        "header": [
+            "#",
+            "Date",
+            "Visitor",
+            "Score",
+            "Home",
+            "Leading scorer",
+            "Attendance",
+            "Record",
+            "Streak"
+        ],
+        "page_title": "2007\u201308 Portland Trail Blazers season",
+        "types": [
+            "real",
+            "text",
+            "text",
+            "text",
+            "text",
+            "text",
+            "text",
+            "text",
+            "text"
+        ],
+        "id": "1-11964047-7",
+        "section_title": "January",
+        "caption": "January",
+        "rows": [
+            [
+                32,
+                "January 2",
+                "Portland Trail Blazers",
+                "W 90\u201379",
+                "Minnesota Timberwolves",
+                "Jefferson : 29",
+                "Target Center 13,339",
+                "19\u201313",
+                "W1"
+            ],
+            [
+                33,
+                "January 3",
+                "Portland Trail Blazers",
+                "W 115\u2013109 2 OT",
+                "Chicago Bulls",
+                "Gordon : 32",
+                "United Center 21,756",
+                "20\u201313",
+                "W2"
+            ],
+            [
+                34,
+                "January 5",
+                "Utah Jazz",
+                "W 89\u2013103",
+                "Portland Trail Blazers",
+                "Webster : 26",
+                "Rose Garden 20,451",
+                "21\u201313",
+                "W3"
+            ],
+            [
+                35,
+                "January 9",
+                "Golden State Warriors",
+                "W 91\u2013109",
+                "Portland Trail Blazers",
+                "Blake : 24",
+                "Rose Garden 20,415",
+                "22\u201313",
+                "W4"
+            ],
+            [
+                36,
+                "January 13",
+                "Portland Trail Blazers",
+                "L 109\u2013116 2 OT",
+                "Toronto Raptors",
+                "Bosh : 38",
+                "Air Canada Centre 19,800",
+                "22\u201314",
+                "L1"
+            ],
+            [
+                37,
+                "January 14",
+                "Portland Trail Blazers",
+                "W 99\u201373",
+                "New Jersey Nets",
+                "Aldridge : 20",
+                "Izod Center 14,242",
+                "23\u201314",
+                "W1"
+            ],
+            [
+                38,
+                "January 16",
+                "Portland Trail Blazers",
+                "L 90\u2013100",
+                "Boston Celtics",
+                "Garnett : 36",
+                "TD Banknorth Garden 18,624",
+                "23\u201315",
+                "L1"
+            ],
+            [
+                39,
+                "January 18",
+                "Portland Trail Blazers",
+                "W 98\u201391",
+                "Miami Heat",
+                "Wade : 37",
+                "AmericanAirlines Arena 19,600",
+                "24\u201315",
+                "W1"
+            ],
+            [
+                40,
+                "January 19",
+                "Portland Trail Blazers",
+                "L 94\u2013101",
+                "Orlando Magic",
+                "Roy : 25",
+                "Amway Arena 17,519",
+                "24\u201316",
+                "L1"
+            ],
+            [
+                41,
+                "January 21",
+                "Portland Trail Blazers",
+                "W 111\u2013109 OT",
+                "Atlanta Hawks",
+                "Johnson : 37",
+                "Philips Arena 17,400",
+                "25\u201316",
+                "W1"
+            ],
+            [
+                42,
+                "January 23",
+                "Portland Trail Blazers",
+                "L 81\u201396",
+                "New Orleans Hornets",
+                "Pargo : 24",
+                "New Orleans Arena 11,006",
+                "25\u201317",
+                "L1"
+            ],
+            [
+                43,
+                "January 25",
+                "Houston Rockets",
+                "L 89\u201379",
+                "Portland Trail Blazers",
+                "Roy : 23",
+                "Rose Garden 20,576",
+                "25\u201318",
+                "L2"
+            ],
+            [
+                44,
+                "January 27",
+                "Atlanta Hawks",
+                "W 93\u201394",
+                "Portland Trail Blazers",
+                "Roy : 24",
+                "Rose Garden 20,438",
+                "26\u201318",
+                "W1"
+            ]
+        ],
+        "name": "table_11964047_7",
+        "questions": [
+            {
+                "phase": 1,
+                "table_id": "1-11964047-7",
+                "question": "what are all the records with a score is w 98\u201391",
+                "sql": {
+                    "sel": 7,
+                    "conds": [[3, 0, "W 98\u201391"]],
+                    "agg": 0
+                }
+            },
+            {
+                "phase": 1,
+                "table_id": "1-11964047-7",
+                "question": "who are all the visitor with a record of 25\u201318",
+                "sql": { "sel": 2, "conds": [[7, 0, "25\u201318"]], "agg": 0 }
+            },
+            {
+                "phase": 1,
+                "table_id": "1-11964047-7",
+                "question": "Which visitors have a leading scorer of roy : 25",
+                "sql": { "sel": 2, "conds": [[5, 0, "Roy : 25"]], "agg": 0 }
+            },
+            {
+                "phase": 1,
+                "table_id": "1-11964047-7",
+                "question": "what is the total number of dates where the scorer is gordon : 32",
+                "sql": { "sel": 1, "conds": [[5, 0, "Gordon : 32"]], "agg": 3 }
+            }
+        ]
+    },
+    {
+        "header": [
+            "Election",
+            "# of candidates nominated",
+            "# of seats won",
+            "# of total votes",
+            "% of popular vote"
+        ],
+        "page_title": "Progressive Conservative Party of Canada",
+        "types": ["real", "real", "real", "real", "text"],
+        "id": "1-123462-2",
+        "section_title": "Election results 1945\u20132000",
+        "caption": "Election results 1945\u20132000",
+        "rows": [
+            [1945, 203, 65, 1448744, "27.62%"],
+            [1949, 249, 41, 1734261, "29.62%"],
+            [1953, 248, 50, 1749579, "31.01%"],
+            [1957, 256, 109, 2564732, "38.81%"],
+            [1958, 265, 208, 3908633, "53.56%"],
+            [1962, 265, 114, 2865542, "37.22%"],
+            [1963, 265, 93, 2582322, "32.72%"],
+            [1965, 265, 95, 2500113, "32.41%"],
+            [1968, 262, 72, 2548949, "31.36%"],
+            [1972, 265, 107, 3388980, "35.02%"],
+            [1974, 264, 95, 3371319, "35.46%"],
+            [1979, 282, 136, 4111606, "35.89%"],
+            [1980, 282, 103, 3552994, "32.49%"],
+            [1984, 282, 211, 6278818, "50.03%"],
+            [1988, 295, 169, 5667543, "43.02%"],
+            [1993, 295, 2, 2178303, "16.04%"],
+            [1997, 301, 20, 2446705, "18.84%"]
+        ],
+        "name": "table_123462_2",
+        "questions": [
+            {
+                "phase": 1,
+                "table_id": "1-123462-2",
+                "question": "How many times was the # of total votes 2582322?",
+                "sql": { "sel": 2, "conds": [[3, 0, 2582322]], "agg": 3 }
+            },
+            {
+                "phase": 1,
+                "table_id": "1-123462-2",
+                "question": "What year was the election when the # of seats won was 65?",
+                "sql": { "sel": 0, "conds": [[2, 0, 65]], "agg": 0 }
+            },
+            {
+                "phase": 1,
+                "table_id": "1-123462-2",
+                "question": "What is the election year when the # of candidates nominated was 262?",
+                "sql": { "sel": 0, "conds": [[1, 0, 262]], "agg": 3 }
+            }
+        ]
+    }
+]

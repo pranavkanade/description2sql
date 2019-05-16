@@ -284,6 +284,13 @@ def get_subjs(doc):
     if prep is not None:
         pobj = get_objects(prep)
         nominals.append(pobj)
+        
+    sprep = None
+    sprep = get_prep(nominals[0])
+    spobj = None
+    if sprep is not None:
+        spobj = get_objects(sprep)
+        nominals.append(spobj)
     return nominals
 
 def get_list_of_toks_to_find_agg(subj, doc):
@@ -308,11 +315,12 @@ def join_nums(candis):
         return str(candis[0])
     if len(candis) > 2:
         candis = candis[:2]
+    candis = [c.text for c in candis]
     return "-".join(candis)
 
 def get_where_cond_val(doc):
     candis = get_num(doc)
-    return join_nums(candis)
+    return candis[0]
 
 def get_verbs_other_than_root(doc):
     verbs = list()
